@@ -1,8 +1,11 @@
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import DAO.UserDAO;
+import DTO.UserDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -40,7 +43,7 @@ public class RegistrationServlet extends HttpServlet {
         }
 
         // Create a UserDTO object and set values
-        UserDTO userDTO = new UserDTO(username, phoneNo, address, email, password, confirmPassword);
+        UserDTO userDTO = new UserDTO(0, username, phoneNo, address, email, password, confirmPassword);
 
         // Create JDBCConnectionDAO instance
         BankDAO connectionDAO = new BankDAO();
