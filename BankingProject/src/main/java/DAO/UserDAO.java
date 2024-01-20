@@ -1,4 +1,5 @@
 package DAO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DTO.AccountDTO;
+import DTO.StatementDTO;
 import DTO.UserDTO;
 
 public class UserDAO {
@@ -48,14 +50,13 @@ public class UserDAO {
             }
         }
     }
+
     // Method to get user details by name
     public List<AccountDTO> getAccountDetails(int userId) throws SQLException {
         List<AccountDTO> accountList = new ArrayList<>();
 
- 
         String accountQuery = "SELECT * FROM bank_account WHERE user_id = ?";
         System.out.println("SQL Query: " + accountQuery);
-
 
         try (PreparedStatement ps = connection.prepareStatement(accountQuery)) {
             ps.setInt(1, userId);
@@ -79,6 +80,7 @@ public class UserDAO {
         return accountList;
     }
 
+    // Method to get user details by name and password
     public UserDTO getUserDetails(String name, String pass) throws SQLException {
         UserDTO userDTO = null;
 
@@ -106,4 +108,32 @@ public class UserDAO {
 
         return userDTO;
     }
+
+    public StatementDTO getStatementForAccount(String accountNumber) throws SQLException {
+        StatementDTO statement = null;
+
+        // Query to retrieve statement details for the given account number
+        String statementQuery = "SELECT * FROM statement WHERE account_id = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(statementQuery)) {
+            ps.setString(1, accountNumber);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    statement = new StatementDTO();
+                    statement.setStatementId(rs.getInt("statement_id"));
+                    statement.setUserId(rs.getInt("user_id"));
+                    statement.setAccountId(rs.getInt("account_id"));
+                    statement.setTransactionType(rs.getString("transaction_type"));
+                    statement.setAmount(rs.getDouble("amount"));
+                    statement.setTransactionDate(rs.getTimestamp("transaction_date"));
+                    // Add other statement details as needed
+                }
+            }
+        }
+
+        return statement;
+    }
+    
+    
 }

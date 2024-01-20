@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+
 import DAO.BankDAO;
 import DAO.UserDAO;
 import DTO.UserDTO;
@@ -31,14 +32,14 @@ public class RegistrationServlet extends HttpServlet {
         // Check if any field is empty
         if (username.isEmpty() || phoneNo.isEmpty() || address.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             PrintWriter pw = response.getWriter();
-            pw.println("<script>alert('All fields must be filled.'); window.location.href='Sign_up.html';</script>");
+            pw.println("<script>alert('All fields must be filled.'); window.location.href='Register.jsp';</script>");
             return;
         }
 
         // Check if password and confirmPassword match
         if (!password.equals(confirmPassword)) {
             PrintWriter pw = response.getWriter();
-            pw.println("<script>alert('Password and Confirm Password do not match.'); window.location.href='Registration.html';</script>");
+            pw.println("<script>alert('Password and Confirm Password do not match.'); window.location.href='Register.jsp';</script>");
             return;
         }
 
@@ -53,7 +54,7 @@ public class RegistrationServlet extends HttpServlet {
             UserDAO userDAO = new UserDAO(con);
 
             if (userDAO.registerUser(userDTO)) {
-                RequestDispatcher rd = request.getRequestDispatcher("Login.html");
+                RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
                 rd.forward(request, response);
             } else {
                 PrintWriter pw = response.getWriter();

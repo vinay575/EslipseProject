@@ -9,7 +9,7 @@ body {
 
 .navbar {
    overflow: hidden;
-   background-color: #333;
+  background-color: #000080;
    border:1px solid black;   
            
 }
@@ -17,15 +17,19 @@ body {
 .navbar a {
     float: left;
     display: block;
-   color: #f2f2f2;
+   color: rgb(255, 255, 255);
    text-align: center;
    padding: 14px 16px;
    text-decoration: none;
+   font-weight:bold;
+	font-size:20px;
 }
 
 .navbar a:hover {
+	
+	
     background-color: #ddd;
-   color: black;
+  color: rgb(0, 0, 0);
 }
 
 /* ---------------------------------------------------------------*/
@@ -89,7 +93,7 @@ body {
         
 
  /* ---------------------------------------------------------------*/
-/* styles.css */
+/* user  */
 
 
 .user-table {
@@ -118,3 +122,107 @@ body {
 }
 
 
+ /* ---------------------------------------------------------------*/
+/* bank styles---------------statement styles   */
+
+
+
+
+
+.Bank-table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            border-collapse: collapse; 
+        }
+
+        .Bank-table th,
+        .Bank-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #000000; 
+        }
+
+        .Bank-table th {
+            background-color: rgb(0, 0, 147);
+            color: white;
+        }
+
+        .Bank-table td input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        .Bank-table td:last-child {
+            text-align: center;
+        }
+
+        .Button{
+          display:flex;
+          justify-content:space-around;
+	      padding:10px;
+          margin-bottom: 10px;
+
+        }
+
+
+ /* --------------------------money transfer styles----------------------------------*/
+.Statement-table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+.Statement-table th, .Statement-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.Statement-table th {
+    background-color: rgb(0, 0, 147);
+    color: white;
+}
+
+ /* --------------------------money transfer styles----------------------------------*/
+.money-transfer-form {
+            max-width: 400px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-submit {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-submit:hover {
+            background-color: #45a049;
+        }
+        
+        
+        
+   

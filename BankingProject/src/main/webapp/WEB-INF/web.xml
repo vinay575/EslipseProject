@@ -69,4 +69,14 @@
     <servlet-name>DashboardServlet</servlet-name>
     <url-pattern>/DashboardServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>StatementServlet</display-name>
+    <servlet-name>StatementServlet</servlet-name>
+    <servlet-class>StatementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StatementServlet</servlet-name>
+    <url-pattern>/StatementServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

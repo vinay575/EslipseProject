@@ -24,7 +24,7 @@ public class BankDAO {
                 connection.close();
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Log or handle the exception appropriately
+            e.printStackTrace(); //  handle the exception 
         }
     }
 }
