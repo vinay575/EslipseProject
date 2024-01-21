@@ -5,9 +5,17 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Login Page</title>
- <link rel="stylesheet" type="text/css" href="Style.css">
+ <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+ <div class="navbar">
+        <a href="#">Home</a>
+        
+        <form action='logout' method="post">
+            <a href="logout">Logout</a>
+        </form>
+    </div>
+    
     <div class="container login-container">
         <form action="LoginServlet" method="post">
             <p class="Heading">Login Here</p>
@@ -27,7 +35,7 @@
                     <td><label>New User Register Here</label></td>
                 </tr>
                 <tr>
-                    <td colspan="2" align="center"><a href="Sign_up.html"><input class="button" type="button" value="Register"></a></td>
+                    <td colspan="2" align="center"><a href="Register.jsp"><input class="button" type="button" value="Register"></a></td>
                 </tr>
             </table>
         </form>

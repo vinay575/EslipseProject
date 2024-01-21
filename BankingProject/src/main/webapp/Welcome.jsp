@@ -10,18 +10,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Dash board</title>
-    <link rel="stylesheet" type="text/css" href="Style.css">
+    <title>Account Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
     <div class="navbar">
         <a href="#">Home</a>
-        
         <form action='logout' method="post">
             <a href="logout">Logout</a>
         </form>
     </div>
-
 
     <% UserDTO user = (UserDTO) session.getAttribute("user"); %>
     <h1 style="text-align: center">
@@ -46,14 +44,9 @@
         </table>
     </div>
     
-   <form action='StatementServlet' method="post">
+    <form action='StatementServlet' method="post">
         <% 
-            Connection connection = (Connection) request.getAttribute("dbConnection");
-            if (connection == null) {
-                throw new RuntimeException("Connection object is null");
-            }
-
-            UserDAO dao = new UserDAO(connection);
+            UserDAO dao = new UserDAO((Connection) request.getAttribute("dbConnection"));
             List<AccountDTO> acctList = dao.getAccountDetails(user.getId());
         %>
 
@@ -83,9 +76,9 @@
                 <% } %>
             </tbody>
         </table>
-        
         <div class="Button">
-            <input type="submit" value="Get Statement">
+            <input type="submit" value="Get Statement" class="add-button" >
+            <a href="CreateAccount.jsp" class="add-button" >Add New Account</a>
         </div>
     </form>
 </body>
