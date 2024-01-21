@@ -63,22 +63,32 @@
                 </tr>
             </thead>
             <tbody>
-                <% for (AccountDTO acct : acctList) { %>
+                <% if (acctList.isEmpty()) { %>
                     <tr>
-                        <td><input type="radio" name="selectedAccount" value="<%= acct.getAccountNumber() %>"></td>
-                        <td><%= acct.getAccountNumber() %></td>
-                        <td><%= acct.getIfscCode() %></td>
-                        <td><%= acct.getBankName() %></td>
-                        <td><%= acct.getAcctType() %></td>
-                        <td><%= acct.getCurrBalance() %></td>
-                        <td>last_txn_date</td>
+                        <td colspan="7" style="text-align: center;">No accounts found for this user.</td>
                     </tr>
-                <% } %>
+                <% } else { 
+                    for (AccountDTO acct : acctList) { %>
+                        <tr>
+                            <td><input type="radio" name="selectedAccount" value="<%= acct.getAccountNumber() %>"></td>
+                            <td><%= acct.getAccountNumber() %></td>
+                            <td><%= acct.getIfscCode() %></td>
+                            <td><%= acct.getBankName() %></td>
+                            <td><%= acct.getAcctType() %></td>
+                            <td><%= acct.getCurrBalance() %></td>
+                            <td>last_txn_date</td>
+                        </tr>
+                <% }
+                } %>
             </tbody>
         </table>
         <div class="Button">
-            <input type="submit" value="Get Statement" class="add-button" >
-            <a href="CreateAccount.jsp" class="add-button" >Add New Account</a>
+            <% if (acctList.isEmpty()) { %>
+                <a href="CreateAccount.jsp" class="add-button" >Add New Account</a>
+            <% } else { %>
+                <input type="submit" value="Get Statement" class="add-button" >
+                 <a href="CreateAccount.jsp" class="add-button" >Add New Account</a>
+            <% } %>
         </div>
     </form>
 </body>
