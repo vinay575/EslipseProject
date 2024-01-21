@@ -135,5 +135,22 @@ public class UserDAO {
         return statement;
     }
     
+    public boolean createAccount(AccountDTO accountDTO) throws SQLException {
+        String query = "INSERT INTO bank_account (account_number, ifsc_code, bank_name, acct_type, curr_balance, user_id) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, accountDTO.getAccountNumber());
+            ps.setString(2, accountDTO.getIfscCode());
+            ps.setString(3, accountDTO.getBankName());
+            ps.setString(4, accountDTO.getAcctType());
+            ps.setDouble(5, accountDTO.getCurrBalance());
+            ps.setInt(6, accountDTO.getUserId());
+
+            int count = ps.executeUpdate();
+
+            return count > 0;
+        }
+    }
+
     
 }
