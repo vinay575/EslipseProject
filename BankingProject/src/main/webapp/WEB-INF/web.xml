@@ -79,4 +79,14 @@
     <servlet-name>StatementServlet</servlet-name>
     <url-pattern>/StatementServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddAccountServlet</display-name>
+    <servlet-name>AddAccountServlet</servlet-name>
+    <servlet-class>AddAccountServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddAccountServlet</servlet-name>
+    <url-pattern>/AddAccountServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
