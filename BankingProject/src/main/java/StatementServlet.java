@@ -56,19 +56,18 @@ public class StatementServlet extends HttpServlet {
 
             if (selectedAccount != null) {
                 // Get the statement details for the selected account
-                StatementDTO statement = userDAO.getStatementForAccount(selectedAccount.getAccountNumber());
+                List<StatementDTO> statementList = userDAO.getStatementsForAccount(selectedAccount.getAccountNumber());
+
+                // Get the latest statement
+                StatementDTO statement = statementList.isEmpty() ? null : statementList.get(0);
 
                 // Set the Connection object as a request attribute
                 request.setAttribute("dbConnection", con);
 
-                
-                
-                
-                
-                
                 // Forward to Statement.jsp with necessary attributes
                 request.setAttribute("selectedAccount", selectedAccount);
-                request.setAttribute("statement", statement);
+                request.setAttribute("statementList", statementList); // Pass the list of statements
+                request.setAttribute("latestStatement", statement); // Pass the latest statement
 
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/Statement.jsp");
                 dispatcher.forward(request, response);

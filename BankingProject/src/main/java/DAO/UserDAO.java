@@ -109,31 +109,38 @@ public class UserDAO {
         return userDTO;
     }
 
-    public StatementDTO getStatementForAccount(String accountNumber) throws SQLException {
-        StatementDTO statement = null;
+    public List<StatementDTO> getStatementsForAccount(String accountNumber) throws SQLException {
+        List<StatementDTO> statementList = new ArrayList<>();
 
         // Query to retrieve statement details for the given account number
-        String statementQuery = "SELECT * FROM statement WHERE account_id = ?";
+        String statementQuery = "SELECT * FROM statement WHERE From_Acc_no = ? OR To_Acc_no = ?";
+        System.out.println("SQL Query: " + statementQuery);
 
         try (PreparedStatement ps = connection.prepareStatement(statementQuery)) {
             ps.setString(1, accountNumber);
+            ps.setString(2, accountNumber);
 
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    statement = new StatementDTO();
-                    statement.setStatementId(rs.getInt("statement_id"));
-                    statement.setUserId(rs.getInt("user_id"));
-                    statement.setAccountId(rs.getInt("account_id"));
-                    statement.setTransactionType(rs.getString("transaction_type"));
-                    statement.setAmount(rs.getDouble("amount"));
+                while (rs.next()) {
+                    StatementDTO statement = new StatementDTO();
+                    statement.setStatementId(rs.getInt("S_no"));
+                    statement.setTransactionId(rs.getInt("transaction_id"));
                     statement.setTransactionDate(rs.getTimestamp("transaction_date"));
-                    // Add other statement details as needed
+                    statement.setUserId(rs.getInt("user_id"));
+                    statement.setDescription(rs.getString("Description"));
+                    statement.setAmountSent(rs.getDouble("Amount_Sent"));
+                    statement.setFromAccountNumber(rs.getString("From_Acc_no"));
+                    statement.setToAccountNumber(rs.getString("To_Acc_no"));
+                    statement.setCurrentBalance(rs.getDouble("Current_Balance"));
+
+                    statementList.add(statement);
                 }
             }
         }
 
-        return statement;
+        return statementList;
     }
+
     
     public boolean createAccount(AccountDTO accountDTO) throws SQLException {
         String query = "INSERT INTO bank_account (account_number, ifsc_code, bank_name, acct_type, curr_balance, user_id) VALUES (?, ?, ?, ?, ?, ?)";
