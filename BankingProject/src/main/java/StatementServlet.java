@@ -32,7 +32,8 @@ public class StatementServlet extends HttpServlet {
 
             if (selectedAccountNumber == null || selectedAccountNumber.isEmpty()) {
                 // Handle case where no account is selected
-                response.sendRedirect("/error.jsp");
+                response.setContentType("text/html");
+                response.getWriter().println("<html><body><script>alert('Please select an account.'); window.history.back();</script></body></html>");
                 return;
             }
 
@@ -60,6 +61,11 @@ public class StatementServlet extends HttpServlet {
                 // Set the Connection object as a request attribute
                 request.setAttribute("dbConnection", con);
 
+                
+                
+                
+                
+                
                 // Forward to Statement.jsp with necessary attributes
                 request.setAttribute("selectedAccount", selectedAccount);
                 request.setAttribute("statement", statement);
