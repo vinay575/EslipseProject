@@ -1,11 +1,5 @@
-
-sql tables used in this project
-
 use serverdata;
-
-
--------------------------------logindata table------------------------------
- 
+	-------------------------------------------------------------------------------------------------------------------
 CREATE TABLE logindata (
     Id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -16,8 +10,16 @@ CREATE TABLE logindata (
     confirm_pass VARCHAR(255) NOT NULL
 );
 
+INSERT INTO logindata (name, phone_no, address, email, pass, confirm_pass)
+VALUES ('vinay', '1234567890', '123 Main St', 'vinay@example.com', '123', '123');
 
--------------------------bank_account table-----------------------------------
+INSERT INTO logindata (name, phone_no, address, email, pass, confirm_pass)
+VALUES ('teja', '9876543210', '456 Oak St', 'teja@example.com', '123', '123');
+
+
+INSERT INTO logindata (name, phone_no, address, email, pass, confirm_pass)
+VALUES ('rakesh', '9876543210', '789 Oak St', 'rakesh@example.com', '123', '123');
+----------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE bank_account (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -27,37 +29,55 @@ CREATE TABLE bank_account (
     acct_type VARCHAR(255) NOT NULL,
     curr_balance DOUBLE NOT NULL,
     user_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES logindata(Id)
+    FOREIGN KEY (user_id) REFERENCES logindata(Id),
+    INDEX idx_account_number (account_number)  --  line to create an index on account_number
 );
 
 
-------------------------- statement table----------------------------
+-- Fake data for bank_account table
+INSERT INTO bank_account (account_number, ifsc_code, bank_name, acct_type, curr_balance, user_id)
+VALUES ('9876543210', 'ABC123', 'Fake Bank 1', 'Savings', 5000.00, 1);
+
+INSERT INTO bank_account (account_number, ifsc_code, bank_name, acct_type, curr_balance, user_id)
+VALUES ('9876543210', 'ABC456', 'Fake Bank 2', 'Checking', 5000.00, 1);
+
+
+INSERT INTO bank_account (account_number, ifsc_code, bank_name, acct_type, curr_balance, user_id)
+VALUES ('1234567890', 'XYZ789', 'Fake Bank 2', 'Checking', 8000.00, 2);
+
+
+INSERT INTO bank_account (account_number, ifsc_code, bank_name, acct_type, curr_balance, user_id)
+VALUES ('1234567890', 'XYZ789', 'Fake Bank 3', 'Checking', 8000.00, 3);
+--------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE statement (
-    statement_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    account_id INT NOT NULL,
-    transaction_type VARCHAR(50) NOT NULL,
-    amount DECIMAL(10, 2) NOT NULL,
+    S_no INT AUTO_INCREMENT PRIMARY KEY,
+    transaction_id INT NOT NULL,
     transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    user_id INT NOT NULL,
+    Description VARCHAR(255) NOT NULL,
+    Amount_Sent DOUBLE NOT NULL,
+    From_Acc_no VARCHAR(255) NOT NULL,
+    To_Acc_no VARCHAR(255) NOT NULL,
+    Current_Balance DOUBLE NOT NULL,
+    FOREIGN KEY (transaction_id) REFERENCES money_transfer(transaction_id),
     FOREIGN KEY (user_id) REFERENCES logindata(Id),
-    FOREIGN KEY (account_id) REFERENCES bank_account(id)
+    FOREIGN KEY (From_Acc_no) REFERENCES bank_account(account_number),
+    FOREIGN KEY (To_Acc_no) REFERENCES bank_account(account_number)
 );
 
 
-
-------------------------------money_transfer table-------------------------------
-
+------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE money_transfer (
-    transfer_id INT AUTO_INCREMENT PRIMARY KEY,
-    source_user INT NOT NULL,
-    target_user INT NOT NULL,
-    source_account INT NOT NULL,
-    target_account INT NOT NULL,
-    amount DECIMAL(10, 2) NOT NULL,
-    transfer_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (source_user) REFERENCES logindata(Id),
-    FOREIGN KEY (target_user) REFERENCES logindata(Id),
-    FOREIGN KEY (source_account) REFERENCES bank_account(id),
-    FOREIGN KEY (target_account) REFERENCES bank_account(id)
+    transaction_id INT AUTO_INCREMENT PRIMARY KEY,
+    transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    user_id INT NOT NULL,
+    Description VARCHAR(255) NOT NULL,
+    Amount_Sent DOUBLE NOT NULL,
+    From_Acc_no VARCHAR(255) NOT NULL,
+    To_Acc_no VARCHAR(255) NOT NULL,
+    Current_Balance DOUBLE NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES logindata(Id),
+    FOREIGN KEY (From_Acc_no) REFERENCES bank_account(account_number),
+    FOREIGN KEY (To_Acc_no) REFERENCES bank_account(account_number)
 );
