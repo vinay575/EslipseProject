@@ -1,5 +1,8 @@
 use serverdata;
-	-------------------------------------------------------------------------------------------------------------------
+
+
+-------------------------------------------------------------------------------------------------------------------
+
 CREATE TABLE logindata (
     Id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -19,6 +22,12 @@ VALUES ('teja', '9876543210', '456 Oak St', 'teja@example.com', '123', '123');
 
 INSERT INTO logindata (name, phone_no, address, email, pass, confirm_pass)
 VALUES ('rakesh', '9876543210', '789 Oak St', 'rakesh@example.com', '123', '123');
+
+
+
+
+
+
 ----------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE bank_account (
@@ -48,6 +57,10 @@ VALUES ('1234567890', 'XYZ789', 'Fake Bank 2', 'Checking', 8000.00, 2);
 
 INSERT INTO bank_account (account_number, ifsc_code, bank_name, acct_type, curr_balance, user_id)
 VALUES ('1234567890', 'XYZ789', 'Fake Bank 3', 'Checking', 8000.00, 3);
+
+
+
+
 --------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE statement (
@@ -65,6 +78,8 @@ CREATE TABLE statement (
     FOREIGN KEY (From_Acc_no) REFERENCES bank_account(account_number),
     FOREIGN KEY (To_Acc_no) REFERENCES bank_account(account_number)
 );
+
+
 
 
 ------------------------------------------------------------------------------------------------------------------------------
