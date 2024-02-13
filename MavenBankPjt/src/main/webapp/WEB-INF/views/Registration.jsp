@@ -9,45 +9,6 @@
     <title>Registration Page</title>
     <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        /* Custom CSS for changing colors */
-        /* Change the background color of the form */
-        body {
-            background-color: #f8f9fa; /* Light gray */
-        }
-
-        /* Change the color of the card header */
-        .card-header {
-            background-color: #007bff; /* Blue */
-            color: #ffffff; /* White */
-        }
-
-        /* Change the color of the primary button */
-        .btn-primary {
-            background-color: #007bff; /* Blue */
-            border-color: #007bff; /* Blue */
-        }
-
-        /* Change the color of the form labels */
-        label {
-            color: #007bff; /* Blue */
-        }
-
-        /* Change the color of the form input fields */
-        input[type="text"],
-        input[type="email"],
-        input[type="password"] {
-            border-color: #007bff; /* Blue */
-        }
-
-        /* Change the color of the form input fields when focused */
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        input[type="password"]:focus {
-            border-color: #0056b3; /* Darker blue */
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Lighter blue */
-        }
-    </style>
 </head>
 <body>
     <div class="container mt-5">
