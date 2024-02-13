@@ -10,7 +10,7 @@ public class UserDTO {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int user_id;
     
     private String name;
     private String phoneNo;
@@ -39,11 +39,11 @@ public class UserDTO {
 	}
 
 	public int getId() {
-		return id;
+		return user_id;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.user_id = id;
 	}
 
 	public String getName() {
