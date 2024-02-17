@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,12 +22,13 @@
 
 					</div>
 					<div class="card-body">
-						<form action="userlogin" method="post">
+						<form action="Login" method="post">
 
 							<div class="mb-3">
-								<label>Enter Email</label> <input type="text" name="email"
-									class="form-control">
+								<label>Enter User Name</label> <input type="text"
+									name="username" class="form-control">
 							</div>
+
 
 							<div class="mb-3">
 								<label>Enter Password</label> <input type="text" name="password"
@@ -36,10 +38,10 @@
 							<button class="btn btn-primary col-md-12">Login</button>
 						</form>
 						<form action="Registration">
-						
+
 							<h5>New user Register Here</h5>
 							<button class="btn btn-primary col-md-12">Register</button>
-							
+
 						</form>
 					</div>
 				</div>

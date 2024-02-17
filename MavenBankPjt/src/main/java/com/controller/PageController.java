@@ -39,14 +39,15 @@ public class PageController {
 		String password = request.getParameter("password");
 		String cfpassword = request.getParameter("confirmPass");
 
-		UserDTO user = new UserDTO(username, password, phoneNo, email, userAddress, cfpassword);
-
-		if (userDAO.saveUserDetails(user)) {
-			return "redirect:/Login";
-		} else {
-			return "redirect:/Registration";
-		}
+		UserDTO user = new UserDTO(username, phoneNo, userAddress, email, password, cfpassword);
+		  if(userDAO.saveUserDetails(user)) {
+			  
+	    	   return "redirect:/Login";
+			}else {
+				return "redirect:/Registration";
+				}
 	}
+	
 
 	@GetMapping("/Login")
 	public String showLoginForm() {
@@ -62,10 +63,42 @@ public class PageController {
 			List<BankDTO> bank = userDAO.getBankDetailsByUserId(user.getId());
 			session.setAttribute("user", user);
 			model.addAttribute("banklist", bank);
-			return "home";
+			model.addAttribute("success", "Login successful.");
+			return "Welcome";
 		} else {
-			return "redirect:/Login";
+			model.addAttribute("error", "Invalid username or password.");
+			return "Login";
 		}
+	}
+
+	@GetMapping("/Addaccount")
+	public ModelAndView getAddBankPage() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("AddAccount");
+		return mv;
+	}
+
+	@PostMapping("/Addaccount")
+	public String processAddAccount(HttpServletRequest request, HttpServletResponse response, Model model) {
+
+		String userId_string = request.getParameter("userId");
+		int userId = Integer.parseInt(userId_string);
+		String bankAccountNo = request.getParameter("accountNumber");
+		String bankName = request.getParameter("bankName");
+		String ifscCode = request.getParameter("ifscCode");
+		String accountType = request.getParameter("accountType");
+		String money = request.getParameter("initialBalance");
+		double currentBalance = Double.parseDouble(money);
+
+		BankDTO bank = new BankDTO(userId, bankAccountNo, bankName, ifscCode, accountType, currentBalance);
+		if (userDAO.saveBankDetails(bank)) {
+
+			return "redirect:/Login";
+		} else {
+			model.addAttribute("error", "something went wrong");
+			return "redirect:/Addaccount";
+		}
+
 	}
 
 }

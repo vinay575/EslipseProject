@@ -4,12 +4,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>BankApplication</groupId>
-  <artifactId>MavenBank</artifactId>
+  <groupId>Com.Bank</groupId>
+  <artifactId>BankApplicationMaven</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>MavenBankPjt Maven Webapp</name>
+  <name>BankApplicationMaven Maven Webapp</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -61,7 +61,7 @@
   </dependencies>
 
   <build>
-    <finalName>MavenBankPjt </finalName>
+    <finalName>BankApplicationMaven</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <plugin>

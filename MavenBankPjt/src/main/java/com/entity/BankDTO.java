@@ -10,90 +10,96 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "bank_Account")
 public class BankDTO {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int accountID;
-	@Column
-	private int user_id;
-	@Column
-	private String bank_account_no;
-	@Column
-	private String bank_name;
-	@Column
-	private String IFSC_code;
-	@Column
-	private String account_type;
-	@Column
-	private double current_balance;
-	
-	
-	
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int accountID;
+    
+    @Column
+    private int userId;
+    
+    @Column
+    private String bankAccountNo;
+    
+    @Column
+    private String bankName;
+    
+    @Column
+    private String ifscCode;
+    
+    @Column
+    private String accountType;
+    
+    @Column
+    private double currentBalance;
+    
+    public BankDTO() {
+        // Default constructor
+    }
+    
+    public BankDTO(int userId, String bankAccountNo, String bankName, String ifscCode, String accountType, double currentBalance) {
+        this.userId = userId;
+        this.bankAccountNo = bankAccountNo;
+        this.bankName = bankName;
+        this.ifscCode = ifscCode;
+        this.accountType = accountType;
+        this.currentBalance = currentBalance;
+    }
+    
+    // Getters and Setters
+    
+    public int getAccountID() {
+        return accountID;
+    }
 
-	public BankDTO(int user_id, String bank_account_no, String bank_name, String iFSC_code, String account_type,
-			double current_balance) {
-		super();
-		this.user_id = user_id;
-		this.bank_account_no = bank_account_no;
-		this.bank_name = bank_name;
-		IFSC_code = iFSC_code;
-		this.account_type = account_type;
-		this.current_balance = current_balance;
-	}
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
+    }
 
-	public int getUser_id() {
-		return user_id;
-	}
+    public int getUserId() {
+        return userId;
+    }
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
-	}
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
-	public int getAccountID() {
-		return accountID;
-	}
+    public String getBankAccountNo() {
+        return bankAccountNo;
+    }
 
-	public void setAccountID(int accountID) {
-		this.accountID = accountID;
-	}
+    public void setBankAccountNo(String bankAccountNo) {
+        this.bankAccountNo = bankAccountNo;
+    }
 
-	public String getBank_account_no() {
-		return bank_account_no;
-	}
+    public String getBankName() {
+        return bankName;
+    }
 
-	public void setBank_account_no(String bank_account_no) {
-		this.bank_account_no = bank_account_no;
-	}
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
 
-	public String getBank_name() {
-		return bank_name;
-	}
+    public String getIfscCode() {
+        return ifscCode;
+    }
 
-	public void setBank_name(String bank_name) {
-		this.bank_name = bank_name;
-	}
+    public void setIfscCode(String ifscCode) {
+        this.ifscCode = ifscCode;
+    }
 
-	public String getIFSC_code() {
-		return IFSC_code;
-	}
+    public String getAccountType() {
+        return accountType;
+    }
 
-	public void setIFSC_code(String iFSC_code) {
-		IFSC_code = iFSC_code;
-	}
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
 
-	public String getAccount_type() {
-		return account_type;
-	}
+    public double getCurrentBalance() {
+        return currentBalance;
+    }
 
-	public void setAccount_type(String account_type) {
-		this.account_type = account_type;
-	}
-
-	public double getCurrent_balance() {
-		return current_balance;
-	}
-
-	public void setCurrent_balance(double current_balance) {
-		this.current_balance = current_balance;
-	}
-
+    public void setCurrentBalance(double currentBalance) {
+        this.currentBalance = currentBalance;
+    }
 }

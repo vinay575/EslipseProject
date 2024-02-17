@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+ <%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +19,8 @@
                         <h2 class="text-center">Registration</h2>
                     </div>
                     <div class="card-body">
-                        <form action="register" method="post">
+                   
+                        <form action="Registration" method="post">
                             <div class="form-group">
                                 <label for="name">Name</label> <input type="text"
                                     class="form-control" id="name" name="name" required>

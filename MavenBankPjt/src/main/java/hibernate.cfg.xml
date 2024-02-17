@@ -15,7 +15,9 @@
 	<property name="show_sql">true</property>
 	
 	
-	<mapping class="com.controller.entity.UserDTO" />
+
+	<mapping class="com.entity.UserDTO" />
+	<mapping class="com.entity.BankDTO" />
 	
 	</session-factory>
 	

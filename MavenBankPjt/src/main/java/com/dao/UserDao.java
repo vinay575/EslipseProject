@@ -1,7 +1,10 @@
 package com.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 import com.controller.SessionFactoryProvider;
@@ -10,7 +13,7 @@ import com.entity.UserDTO;
 
 
 
-public class UserDao {
+public class UserDAO {
 	Transaction transaction = null;
 	public boolean saveUserDetails(UserDTO user) {
 		
@@ -21,7 +24,7 @@ public class UserDao {
 			session.save(user);
 			transaction.commit();
 			session.close();
-			return false;
+			return true;
 		}catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -38,9 +41,10 @@ public class UserDao {
 	public UserDTO showUserDetails(String username, String password) {
 		Session session=SessionFactoryProvider.getSessionFactory();
 		transaction=session.beginTransaction();
-		Query<UserDTO> query = session.createQuery("FROM UserDTO WHERE username = :username AND password = :password", UserDTO.class);
+        Query<UserDTO> query = session.createQuery("FROM UserDTO WHERE name = :username AND password = :password", UserDTO.class);
         query.setParameter("username", username);
         query.setParameter("password", password);
+
         return query.uniqueResult();
 		
 	}
@@ -55,7 +59,7 @@ public boolean saveBankDetails(BankDTO bank) {
 			session.save(bank);
 			transaction.commit();
 			session.close();
-			return false;
+			return true;
 		}catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -67,6 +71,22 @@ public boolean saveBankDetails(BankDTO bank) {
 	}
 		return false;
 	
+}
+
+
+public List<BankDTO> getBankDetailsByUserId(int user_Id) {
+	Session session=SessionFactoryProvider.getSessionFactory();
+	transaction=session.beginTransaction();
+    
+    // Write your native SQL query to fetch bank details based on user_id
+    String sqlQuery = "select *from bank_Account where userId= :userId";
+
+    // Create a native query
+    NativeQuery<BankDTO> query = session.createNativeQuery(sqlQuery, BankDTO.class);
+    query.setParameter("userId", user_Id);
+
+    // Execute query and return results
+    return query.getResultList();
 }
 	
 }
