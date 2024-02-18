@@ -1,0 +1,84 @@
+@charset "UTF-8";
+/* styles.css */
+
+/* Header styles */
+header {
+    background-color: #343a40;
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+}
+
+header img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+/* Container styles */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Form box styles */
+.form-box {
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Button styles */
+.btn {
+    cursor: pointer;
+}
+
+/* Logout button styles */
+.logout {
+    width: 10%;
+    margin-top: 20px;
+}
+
+/* User details styles */
+.userDetails {
+    margin-top: 20px;
+}
+
+/* Accounts list styles */
+.accountsList {
+    margin-top: 20px;
+}
+
+/* Transactions styles */
+.transactions {
+    margin-top: 20px;
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #343a40;
+    color: white;
+}
+
+/* Responsive image */
+img {
+    max-width: 100%;
+    height: auto;
+}

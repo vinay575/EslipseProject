@@ -14,10 +14,10 @@
 	<property name="hbm2ddl.auto">update</property>
 	<property name="show_sql">true</property>
 	
-	
 
 	<mapping class="com.entity.UserDTO" />
 	<mapping class="com.entity.BankDTO" />
+	<mapping class="com.entity.StatementDTO" />
 	
 	</session-factory>
 	

@@ -1,56 +1,59 @@
 package com.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
 
 @Entity
-
-@Table(name="User_info")
-
+@Table(name = "User_info")
 public class UserDTO {
-	
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int user_id;
-    
-    private String name;
-    private String phoneNo;
-    private String address;
-    private String email;
-    private String password;
-    private String confirmPass;
-    
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int user_id;
+
+	private String name;
+	private String phoneNo;
+	private String address;
+	private String email;
+	private String password;
+	private String confirmPass;
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<BankDTO> banks = new ArrayList<>();
+
 	public UserDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-    
-    // Constructors, Getters, and Setters
-    
-	public UserDTO( String name, String phoneNo, String address, String email, String password,
-			String confirmPass) {
+
+	public UserDTO(int user_id, String name, String phoneNo, String address, String email, String password,
+			String confirmPass, List<BankDTO> banks) {
 		super();
+		this.user_id = user_id;
 		this.name = name;
 		this.phoneNo = phoneNo;
 		this.address = address;
 		this.email = email;
 		this.password = password;
 		this.confirmPass = confirmPass;
+		this.banks = banks;
 	}
 
-	public int getId() {
+	public int getUser_id() {
 		return user_id;
 	}
 
-	public void setId(int id) {
-		this.user_id = id;
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
 	public String getName() {
@@ -99,6 +102,14 @@ public class UserDTO {
 
 	public void setConfirmPass(String confirmPass) {
 		this.confirmPass = confirmPass;
+	}
+
+	public List<BankDTO> getBanks() {
+		return banks;
+	}
+
+	public void setBanks(List<BankDTO> banks) {
+		this.banks = banks;
 	}
 
 	

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
- <%@ page isELIgnored="false" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,7 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+
 </head>
 <body>
 
@@ -22,6 +24,11 @@
 
 					</div>
 					<div class="card-body">
+						<c:if test="${not empty error}">
+							<script>
+								alert("${fn:escapeXml(error)}");
+							</script>
+						</c:if>
 						<form action="Login" method="post">
 
 							<div class="mb-3">

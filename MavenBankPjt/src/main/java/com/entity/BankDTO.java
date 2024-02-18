@@ -5,48 +5,54 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 @Entity
 @Table(name = "bank_Account")
 public class BankDTO {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "accountID")
     private int accountID;
-    
-    @Column
-    private int userId;
-    
-    @Column
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserDTO user;
+
+    @Column(name = "bankAccountNo")
     private String bankAccountNo;
-    
-    @Column
+
+    @Column(name = "bankName")
     private String bankName;
-    
-    @Column
+
+    @Column(name = "ifscCode")
     private String ifscCode;
-    
-    @Column
+
+    @Column(name = "accountType")
     private String accountType;
-    
-    @Column
+
+    @Column(name = "currentBalance")
     private double currentBalance;
     
-    public BankDTO() {
-        // Default constructor
-    }
     
-    public BankDTO(int userId, String bankAccountNo, String bankName, String ifscCode, String accountType, double currentBalance) {
-        this.userId = userId;
+    
+
+    public BankDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public BankDTO(UserDTO user, String bankAccountNo, String bankName, String ifscCode, String accountType, double currentBalance) {
+        this.user = user;
         this.bankAccountNo = bankAccountNo;
         this.bankName = bankName;
         this.ifscCode = ifscCode;
         this.accountType = accountType;
         this.currentBalance = currentBalance;
     }
-    
-    // Getters and Setters
-    
+
     public int getAccountID() {
         return accountID;
     }
@@ -55,12 +61,12 @@ public class BankDTO {
         this.accountID = accountID;
     }
 
-    public int getUserId() {
-        return userId;
+    public UserDTO getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 
     public String getBankAccountNo() {
