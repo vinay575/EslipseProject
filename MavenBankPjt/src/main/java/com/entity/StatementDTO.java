@@ -21,36 +21,41 @@ public class StatementDTO {
 	private int transactionId;
 
 	@Column
-	private double amount;
-
-	@Column
 	private int fromAccountNumber;
 
 	@Column
 	private int toAccountNumber;
 
 	@Column
-	private Timestamp transactionDate;
+	private double amount;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "accountID", insertable = false, updatable = false)
-	private BankDTO bank;
+	@Column
+	private Timestamp transactionDate;
+	
+	
+
+
+
 
 	public StatementDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public StatementDTO(int transactionId,  double amount, int fromAccountNumber,
-			int toAccountNumber, Timestamp transactionDate, BankDTO bank) {
+
+
+
+	public StatementDTO(int fromAccountNumber, int toAccountNumber, double amount, Timestamp transactionDate
+			) {
 		super();
-		this.transactionId = transactionId;		
-		this.amount = amount;
 		this.fromAccountNumber = fromAccountNumber;
 		this.toAccountNumber = toAccountNumber;
+		this.amount = amount;
 		this.transactionDate = transactionDate;
-		this.bank = bank;
+		
 	}
+
+
 
 	public int getTransactionId() {
 		return transactionId;
@@ -58,15 +63,6 @@ public class StatementDTO {
 
 	public void setTransactionId(int transactionId) {
 		this.transactionId = transactionId;
-	}
-
-
-	public double getAmount() {
-		return amount;
-	}
-
-	public void setAmount(double amount) {
-		this.amount = amount;
 	}
 
 	public int getFromAccountNumber() {
@@ -85,6 +81,14 @@ public class StatementDTO {
 		this.toAccountNumber = toAccountNumber;
 	}
 
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+
 	public Timestamp getTransactionDate() {
 		return transactionDate;
 	}
@@ -93,12 +97,6 @@ public class StatementDTO {
 		this.transactionDate = transactionDate;
 	}
 
-	public BankDTO getBank() {
-		return bank;
-	}
-
-	public void setBank(BankDTO bank) {
-		this.bank = bank;
-	}
+	
 
 }

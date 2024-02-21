@@ -114,28 +114,50 @@ public class UserDAO {
 			return false;
 		}
 	}
+	
+	
+	
+//	//money add into statement table 
+//	public Double getCurrentBalance(int accountId) {
+//	    Session session = null;
+//	    try {
+//	        session = SessionFactoryProvider.getSessionFactory();
+//	        BankDTO bank = session.get(BankDTO.class, accountId);
+//	        if (bank != null) {
+//	            return bank.getCurrentBalance();
+//	        }
+//	    } catch (Exception e) {
+//	        e.printStackTrace();
+//	    } finally {
+//	        if (session != null) {
+//	            session.close();
+//	        }
+//	    }
+//	    return 0.0;
+//	}
+//	
+//	
+	
+	
+	
+	
+	
 
-	public Double getCurrentBalance(int accountId) {
-	    Session session = SessionFactoryProvider.getSessionFactory();
-	    transaction = session.beginTransaction();
-
-	    // Write your Hibernate query to retrieve the current balance
-	    String hql = "SELECT b.currentBalance FROM BankDTO b WHERE b.accountID = :accountId";
-
-	    // Create a Hibernate query object
-	    Query<Double> query = session.createQuery(hql, Double.class);
-	    query.setParameter("accountId", accountId);
-
-	    // Execute the query and return the result
-	    Double result = query.uniqueResult();
-	    if (result != null) {
-	        return result; // No need to call doubleValue() here
-	    } else {
-	        // Handle the case where the result is null
-	        // You can return a default value, throw an exception, or handle it according to your application logic
-	        return null; // or throw new SomeException("Current balance is null for accountId: " + accountId);
-	    }
-	}
+//	public Double getCurrentBalance(int accountId) {
+//	    Session session = SessionFactoryProvider.getSessionFactory();
+//	    transaction = session.beginTransaction();
+//
+//	    // Write your Hibernate query to retrieve the current balance
+//	    String hql = "SELECT b.currentBalance FROM BankDTO b WHERE b.accountID = :accountId";
+//
+//	    // Create a Hibernate query object
+//	    Query<Double> query = session.createQuery(hql, Double.class);
+//	    query.setParameter("accountId", accountId);
+//
+//	    return query.uniqueResult();
+//	
+//
+//	}
 
 
 	public boolean logTransaction(StatementDTO txns) {

@@ -41,9 +41,9 @@ public class PageController {
 		String userAddress = request.getParameter("address");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		String cfpassword = request.getParameter("confirmPass");
+	
 
-		UserDTO user = new UserDTO(0, username, phoneNo, userAddress, email, password, cfpassword, null);
+		UserDTO user = new UserDTO(username, phoneNo, userAddress, email, password, null);
 		if (userDAO.saveUserDetails(user)) {
 
 			return "redirect:/Login";
@@ -139,7 +139,7 @@ public class PageController {
     	
     	Date currentDate = new Date(System.currentTimeMillis());
     	
-    	 StatementDTO transaction = new StatementDTO(0, amount, accountID, accountID, new Timestamp(currentDate.getTime()), null);
+    	 StatementDTO transaction = new StatementDTO( accountID, accountID, amount, new Timestamp(currentDate.getTime()));
     	
     	mv.addObject("accountID", accountID);
     	double currentBalance=userDAO.getCurrentBalance(accountID);

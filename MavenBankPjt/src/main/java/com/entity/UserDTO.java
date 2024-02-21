@@ -25,7 +25,7 @@ public class UserDTO {
 	private String address;
 	private String email;
 	private String password;
-	private String confirmPass;
+	
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<BankDTO> banks = new ArrayList<>();
@@ -35,16 +35,16 @@ public class UserDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserDTO(int user_id, String name, String phoneNo, String address, String email, String password,
-			String confirmPass, List<BankDTO> banks) {
+	public UserDTO( String name, String phoneNo, String address, String email, String password,
+			 List<BankDTO> banks) {
 		super();
-		this.user_id = user_id;
+		
 		this.name = name;
 		this.phoneNo = phoneNo;
 		this.address = address;
 		this.email = email;
 		this.password = password;
-		this.confirmPass = confirmPass;
+		
 		this.banks = banks;
 	}
 
@@ -96,13 +96,7 @@ public class UserDTO {
 		this.password = password;
 	}
 
-	public String getConfirmPass() {
-		return confirmPass;
-	}
-
-	public void setConfirmPass(String confirmPass) {
-		this.confirmPass = confirmPass;
-	}
+	
 
 	public List<BankDTO> getBanks() {
 		return banks;

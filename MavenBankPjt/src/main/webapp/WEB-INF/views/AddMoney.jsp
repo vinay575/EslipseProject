@@ -33,11 +33,7 @@
                     <div class="card-header">
                         <h2 class="text-center">Add Money</h2>          
                     </div>
-                    <c:if test="${not empty error}">
-							<script>
-								alert("${fn:escapeXml(error)}");
-							</script>
-						</c:if>
+                   
                     <div class="card-body">
                         <h3 class="text-center">Welcome</h3>
                         <form id="addMoneyForm" action="AddMoney" method="post">

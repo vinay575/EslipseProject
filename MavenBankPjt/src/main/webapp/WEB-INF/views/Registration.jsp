@@ -40,12 +40,7 @@
                             <div class="form-group">
                                 <label for="password">Password</label> <input type="password"
                                     class="form-control" id="password" name="password" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="confirmPass">Confirm Password</label> <input
-                                    type="password" class="form-control" id="confirmPass"
-                                    name="confirmPass" required>
-                            </div>
+                            </div>                           
                             <button type="submit" class="btn btn-primary btn-block">Register</button>
                         </form>
                     </div>
