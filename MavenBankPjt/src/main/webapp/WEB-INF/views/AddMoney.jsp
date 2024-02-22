@@ -12,12 +12,22 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
+<script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 <body>
     <header class="navbar navbar-dark bg-dark">
-        <div class="container">
-            <h1 class="text-white">My_Money</h1>
-        </div>
-    </header>
+			<div class="container">
+				<div class="navbar-nav">
+					<a href="#" class="btn btn-outline-light mr-3" onclick="goBack()">Home</a> 					
+				</div>
+				<h1 class="text-white">My_Money</h1>
+				<a href="logout" class="btn btn-danger">Logout</a>
+			</div>
+		</header>
+		
     
       <%
         UserDTO user = (UserDTO) session.getAttribute("user");
@@ -36,15 +46,16 @@
                    
                     <div class="card-body">
                         <h3 class="text-center">Welcome</h3>
-                        <form id="addMoneyForm" action="AddMoney" method="post">
-                            <div class="form-group">
+                        
+                            <!--  <div class="form-group">
                                 <label for="accountNumber">Bank Account Number:</label>
                                 <input type="text" id="accountNumber" name="accountNumber" value="${accountID}" class="form-control" readonly>
-                            </div>
+                            </div>-->
                             <div class="form-group">
                                 <label for="accountName">Account Holder Name:</label>
                                 <input type="text" id="accountName" name="accountName" value="${user.name}" class="form-control" readonly>
                             </div>
+                              <form id="addMoneyForm" action="AddMoney" method="post">
                             <div class="form-group">
                                 <input type="hidden" name="accountID" value="${accountID}">
                                 <label for="amount">Amount to Add:</label>                              
@@ -60,9 +71,6 @@
        <%
         }
         %>
-    <div class="mt-3">
-        <a href="http://localhost:8082/MyDigiPurse/logout" class="btn btn-danger btn-sm">Logout</a>
-    </div>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

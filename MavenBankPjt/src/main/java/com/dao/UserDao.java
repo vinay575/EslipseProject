@@ -95,69 +95,55 @@ public class UserDAO {
 		return null;
 	}
 
-	public boolean updateBalance(int accountId, double newBalance) {
-		Session session = SessionFactoryProvider.getSessionFactory();
-		transaction = session.beginTransaction();
+	public boolean updateBalance(BankDTO bank) {
+	    try {
+	        Session session = SessionFactoryProvider.getSessionFactory();
+	        transaction = session.beginTransaction();
 
-		try {
-
-			String sql = "UPDATE bank_account SET currentBalance = :newBalance WHERE accountID = :accountId";
-			int updatedRows = session.createQuery(sql).setParameter("newBalance", newBalance)
-					.setParameter("accountId", accountId).executeUpdate();
-
-			transaction.commit();
-			session.close();
-			return updatedRows > 0;
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+	        session.update(bank);
+	        transaction.commit();
+	        session.close();
+	        return true;
+	    } catch (Exception e) {
+	        if (transaction != null) {
+	            transaction.rollback();
+	        }
+	        e.printStackTrace();
+	    }
+	    return false;
 	}
 	
 	
-	
-//	//money add into statement table 
-//	public Double getCurrentBalance(int accountId) {
-//	    Session session = null;
-//	    try {
-//	        session = SessionFactoryProvider.getSessionFactory();
-//	        BankDTO bank = session.get(BankDTO.class, accountId);
-//	        if (bank != null) {
-//	            return bank.getCurrentBalance();
-//	        }
-//	    } catch (Exception e) {
-//	        e.printStackTrace();
-//	    } finally {
-//	        if (session != null) {
-//	            session.close();
-//	        }
-//	    }
-//	    return 0.0;
-//	}
-//	
-//	
+	public BankDTO getBankById(int accountId) {
+	    Session session = null;
+	    try {
+	        session = SessionFactoryProvider.getSessionFactory();
+	        return session.get(BankDTO.class, accountId);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (session != null) {
+	            session.close();
+	        }
+	    }
+	    return null;
+	}
 	
 	
-	
-	
-	
-
-//	public Double getCurrentBalance(int accountId) {
-//	    Session session = SessionFactoryProvider.getSessionFactory();
-//	    transaction = session.beginTransaction();
-//
-//	    // Write your Hibernate query to retrieve the current balance
-//	    String hql = "SELECT b.currentBalance FROM BankDTO b WHERE b.accountID = :accountId";
-//
-//	    // Create a Hibernate query object
-//	    Query<Double> query = session.createQuery(hql, Double.class);
-//	    query.setParameter("accountId", accountId);
-//
-//	    return query.uniqueResult();
-//	
-//
-//	}
+	public double getCurrentBalance(int accountId) {
+		Session session=SessionFactoryProvider.getSessionFactory();
+		transaction=session.beginTransaction();
+	    
+	    // Write your Hibernate query to retrieve the current balance
+	    String hql = "SELECT b.currentBalance FROM BankDTO b WHERE b.accountID = :accountId";
+	    
+	    // Create a Hibernate query object
+	    Query<Double> query = session.createQuery(hql, Double.class);
+	    query.setParameter("accountId", accountId);
+	    
+	    // Execute the query and return the result
+	    return query.uniqueResult();
+	}
 
 
 	public boolean logTransaction(StatementDTO txns) {
@@ -176,5 +162,21 @@ public class UserDAO {
 		}
 		return false;
 	}
+	
+	public List<StatementDTO> getStatementsByAccountID(int accountID) {
+	    Session session = SessionFactoryProvider.getSessionFactory();
+	    transaction = session.beginTransaction();
+
+	    // Write your HQL query to fetch statements based on the account ID
+	    String hql = "FROM StatementDTO WHERE fromAccountNumber = :accountID OR toAccountNumber = :accountID";
+
+	    // Create a Hibernate query object
+	    Query<StatementDTO> query = session.createQuery(hql, StatementDTO.class);
+	    query.setParameter("accountID", accountID);
+
+	    // Execute query and return results
+	    return query.getResultList();
+	}
+
 
 }

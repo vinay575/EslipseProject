@@ -15,13 +15,21 @@
 <link rel="stylesheet" href="styles.css">
 <script type="text/javascript" src="Script.js"></script>
 </head>
+<script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 <body>
 	<header class="navbar navbar-dark bg-dark">
-		<div class="container">
-			<img src="" alt="Company Logo">
-			<h1 class="text-white">My_Money</h1>
-		</div>
-	</header>
+			<div class="container">
+				<div class="navbar-nav">
+					<a href="#"  class="btn btn-outline-light mr-3" onclick="goBack()">Home</a> 					
+				</div>
+				<h1 class="text-white">My_Money</h1>
+				<a href="logout" class="btn btn-danger">Logout</a>
+			</div>
+		</header>
 
 	<%
 	UserDTO user = (UserDTO) session.getAttribute("user");

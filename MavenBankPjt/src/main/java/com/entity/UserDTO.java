@@ -1,14 +1,9 @@
 package com.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -27,16 +22,14 @@ public class UserDTO {
 	private String password;
 	
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<BankDTO> banks = new ArrayList<>();
 
 	public UserDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserDTO( String name, String phoneNo, String address, String email, String password,
-			 List<BankDTO> banks) {
+	public UserDTO( String name, String phoneNo, String address, String email, String password
+			) {
 		super();
 		
 		this.name = name;
@@ -45,7 +38,7 @@ public class UserDTO {
 		this.email = email;
 		this.password = password;
 		
-		this.banks = banks;
+		
 	}
 
 	public int getUser_id() {
@@ -98,14 +91,7 @@ public class UserDTO {
 
 	
 
-	public List<BankDTO> getBanks() {
-		return banks;
-	}
-
-	public void setBanks(List<BankDTO> banks) {
-		this.banks = banks;
-	}
-
+	
 	
 	
 }
