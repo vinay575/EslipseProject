@@ -112,23 +112,23 @@ public class PageController {
 	                                   @RequestParam("selectedAccount") int accountID,
 	                                   HttpSession session) {
 	    ModelAndView modelAndView = new ModelAndView();
-
-	    // Pass the selected account ID to the session
-	    session.setAttribute("selectedAccountID", accountID);
+	    modelAndView.addObject("accountID", accountID);
 
 	    if ("Statement".equals(selectedAction)) {
-	        modelAndView.setViewName("redirect:/Statement");
+	        List<StatementDTO> statementList = userDAO.getStatementsByAccountID(accountID);
+	        session.setAttribute("statementList", statementList);
+	        modelAndView.setViewName("Statement");
 	    } else if ("AddMoney".equals(selectedAction)) {
-	        modelAndView.setViewName("AddMoney"); 
+	        modelAndView.setViewName("AddMoney");
 	    } else if ("SendMoney".equals(selectedAction)) {
-	        modelAndView.setViewName("SendMoney"); 
+	        modelAndView.setViewName("sendMoney");
 	    } else {
-	        modelAndView.setViewName("Login"); 
+	        modelAndView.setViewName("Login");
 	    }
 
 	    return modelAndView;
 	}
-
+	
 	
 			
     @PostMapping("/AddMoney")
@@ -160,28 +160,7 @@ public class PageController {
 
         return mv;
     }
+
+
     
-    
-    @GetMapping("/Statement")
-    public String showStatementPage(Model model, HttpSession session) {
-        // Retrieve the selected account ID from the session
-        int selectedAccountID = (int) session.getAttribute("selectedAccountID");
-
-        // Fetch statements related to the selected account ID
-        List<StatementDTO> statementList = userDAO.getStatementsByAccountID(selectedAccountID);
-
-        // Add the statement list to the model for rendering in the Statement.jsp page
-        model.addAttribute("statementList", statementList);
-
-        // Return the name of the Statement.jsp view
-        return "Statement";
-    }
-
 }
-
-
-
-
-
-
-

@@ -1,5 +1,6 @@
 package com.dao;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -162,21 +163,27 @@ public class UserDAO {
 		}
 		return false;
 	}
-	
 	public List<StatementDTO> getStatementsByAccountID(int accountID) {
 	    Session session = SessionFactoryProvider.getSessionFactory();
-	    transaction = session.beginTransaction();
-
-	    // Write your HQL query to fetch statements based on the account ID
-	    String hql = "FROM StatementDTO WHERE fromAccountNumber = :accountID OR toAccountNumber = :accountID";
-
-	    // Create a Hibernate query object
-	    Query<StatementDTO> query = session.createQuery(hql, StatementDTO.class);
-	    query.setParameter("accountID", accountID);
-
-	    // Execute query and return results
-	    return query.getResultList();
+	    Transaction transaction = null;
+	    
+	    try {
+	        transaction = session.beginTransaction();
+	        String hql = "FROM StatementDTO WHERE fromAccountNumber = :accountID OR toAccountNumber = :accountID";
+	        Query<StatementDTO> query = session.createQuery(hql, StatementDTO.class);
+	        query.setParameter("accountID", accountID);
+	        List<StatementDTO> statementList = query.getResultList();
+	        transaction.commit();
+	        return statementList;
+	    } catch (Exception e) {
+	        if (transaction != null) {
+	            transaction.rollback();
+	        }
+	        e.printStackTrace();
+	    } finally {
+	        session.close();
+	    }
+	    return Collections.emptyList();
 	}
-
 
 }
