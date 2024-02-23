@@ -169,7 +169,7 @@ public class UserDAO {
 	    
 	    try {
 	        transaction = session.beginTransaction();
-	        String hql = "FROM StatementDTO WHERE fromAccountNumber = :accountID OR toAccountNumber = :accountID";
+	        String hql = "FROM StatementDTO WHERE from_Account_Id = :accountID OR to_Account_Id = :accountID";
 	        Query<StatementDTO> query = session.createQuery(hql, StatementDTO.class);
 	        query.setParameter("accountID", accountID);
 	        List<StatementDTO> statementList = query.getResultList();
@@ -185,5 +185,45 @@ public class UserDAO {
 	    }
 	    return Collections.emptyList();
 	}
+	
+	
+	
+	public int getAccountIdByAccountNumber(String accountNumber) {
+	    
+		Session session=SessionFactoryProvider.getSessionFactory();
+		transaction=session.beginTransaction();
+	   
+	    String hql = "SELECT b.id FROM BankDTO b WHERE b.bankAccountNo = :accountNumber";
+	    
+	    
+	    Query<Integer> query = session.createQuery(hql, Integer.class);
+	    query.setParameter("accountNumber", accountNumber);
+	    
+	   
+	    Integer accountId = query.uniqueResult();
+	    return accountId != null ? accountId : -1; // Return -1 if account ID is not found
+	}
+	
+	
+	public boolean updateBalance(int accountId, double newBalance) {
+    	Session session=SessionFactoryProvider.getSessionFactory();
+    	transaction=session.beginTransaction();
 
+        try {
+            
+            String hql = "UPDATE BankDTO b SET b.currentBalance = :newBalance WHERE b.accountID = :accountId";
+            int updatedRows = session.createQuery(hql)
+                                    .setParameter("newBalance", newBalance)
+                                    .setParameter("accountId", accountId)
+                                    .executeUpdate();
+
+            transaction.commit();
+    		session.close();
+            return updatedRows > 0;
+            
+        } catch (Exception e) {
+        	e.printStackTrace();
+            return false;
+        }	
+    }
 }

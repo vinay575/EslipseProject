@@ -37,8 +37,8 @@
             <thead class="thead-dark">
                 <tr>
                     <th>Transaction ID</th>
-                    <th>From Account Number</th>
-                    <th>To Account Number</th>
+                    <th>From Account ID</th>
+                    <th>To Account ID</th>
                     <th>Amount</th>
                     <th>Transaction Type</th>
                     <th>Transaction Date</th>
@@ -48,8 +48,8 @@
                 <c:forEach items="${statementList}" var="statement">
                     <tr>
                         <td>${statement.transactionId}</td>
-                        <td>${statement.fromAccountNumber}</td>
-                        <td>${statement.toAccountNumber}</td>
+                        <td>${statement.from_Account_Id}</td>
+                        <td>${statement.to_Account_Id}</td>
                         <td>${statement.amount}</td>
                         <td>${statement.transactionType}</td>
                         <td>${statement.transactionDate}</td>
