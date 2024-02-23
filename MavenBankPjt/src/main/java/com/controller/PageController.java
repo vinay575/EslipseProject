@@ -1,6 +1,8 @@
+
 package com.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -121,7 +123,7 @@ public class PageController {
 	    } else if ("AddMoney".equals(selectedAction)) {
 	        modelAndView.setViewName("AddMoney");
 	    } else if ("SendMoney".equals(selectedAction)) {
-	        modelAndView.setViewName("sendMoney");
+	        modelAndView.setViewName("SendMoney");
 	    } else {
 	        modelAndView.setViewName("Login");
 	    }
@@ -161,6 +163,41 @@ public class PageController {
         return mv;
     }
 
+    @PostMapping("/sendmoney")
+    public ModelAndView sendMoney(@RequestParam("accountID") int sourceAccountID,
+                                   @RequestParam("amount") double amount,
+                                   @RequestParam("recipientAccount") String toAccountNumber) throws SQLException {
+    	
+    	
+    	int targetAccountID = userDAO.getAccountIdByAccountNumber(toAccountNumber);
+    	
+    	double sourceBalance=userDAO.getCurrentBalance(sourceAccountID);
+    	double newSourceBalance=sourceBalance-amount;
+    	boolean updateSourceBalance=userDAO.updateBalance(sourceAccountID, newSourceBalance);
+    	Date currentDate = new Date(System.currentTimeMillis());
+    	
+		StatementDTO transactionOfSource=new StatementDTO(sourceAccountID,targetAccountID,amount,"debit", currentDate);
+		StatementDTO transactionOfTarget=new StatementDTO(targetAccountID,sourceAccountID,amount,"credit", currentDate);
+    	
+    	double targetBalance=userDAO.getCurrentBalance(targetAccountID);
+    	double newTargetBalance=targetBalance + amount;
+    	 boolean updateTargetBalance=userDAO.updateBalance(targetAccountID, newTargetBalance);
+    	 
+    	 boolean sourceTransaction=userDAO.logTransaction(transactionOfSource);
+    	 boolean targetTransaction=userDAO.logTransaction(transactionOfTarget);
+    	 
+    	 if (updateSourceBalance && updateTargetBalance && sourceTransaction && targetTransaction) {
+			mv.addObject("success", "succesfully sent money");	
+    		 mv.setViewName("Welcome");
+	        } else {
+	        	mv.addObject("error","unable to send money");
+	        	mv.setViewName("info");
+	        }
+		return mv;
+    			
 
+		}
+    
     
 }
+

@@ -31,12 +31,15 @@
 <body>
     <form id="accountForm" action="Process" method="post">
         <input type="hidden" id="selectedPage" name="selectedPage">
-        <header class="navbar navbar-dark bg-dark">
-            <div class="container">
-                <img src="" alt="Company Logo">
-                <h1 class="text-white">My_Money</h1>
-            </div>
-        </header>
+       <header class="navbar navbar-dark bg-dark">
+			<div class="container">
+				<div class="navbar-nav">
+					<a href="#" class="btn btn-outline-light mr-3" >Home</a> 					
+				</div>
+				<h1 class="text-white">My_Money</h1>
+				<a href="logout" class="btn btn-danger">Logout</a>
+			</div>
+		</header>
 
         <%
         UserDTO user = (UserDTO) session.getAttribute("user");

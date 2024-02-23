@@ -18,10 +18,10 @@ public class StatementDTO {
 	private int transactionId;
 
 	@Column
-	private int fromAccountNumber;
+	private int from_Account_Id;
 
 	@Column
-	private int toAccountNumber;
+	private int to_Account_Id;
 
 	@Column
 	private double amount;
@@ -46,10 +46,10 @@ public class StatementDTO {
 
 
 
-	public StatementDTO(int fromAccountNumber, int toAccountNumber, double amount, String transactionType, Date transactionDate) {
+	public StatementDTO(int from_Account_Id, int to_Account_Id, double amount, String transactionType, Date transactionDate) {
 	    super();
-	    this.fromAccountNumber = fromAccountNumber;
-	    this.toAccountNumber = toAccountNumber;
+	    this.from_Account_Id = from_Account_Id;
+	    this.to_Account_Id = to_Account_Id;
 	    this.amount = amount;
 	    this.transactionType = transactionType;
 	    this.transactionDate = transactionDate;
@@ -72,29 +72,29 @@ public class StatementDTO {
 
 
 
-	public int getFromAccountNumber() {
-		return fromAccountNumber;
+	public int getFrom_Account_Id() {
+		return from_Account_Id;
 	}
 
 
 
 
-	public void setFromAccountNumber(int fromAccountNumber) {
-		this.fromAccountNumber = fromAccountNumber;
+	public void setFrom_Account_Id(int from_Account_Id) {
+		this.from_Account_Id = from_Account_Id;
 	}
 
 
 
 
-	public int getToAccountNumber() {
-		return toAccountNumber;
+	public int getTo_Account_Id() {
+		return to_Account_Id;
 	}
 
 
 
 
-	public void setToAccountNumber(int toAccountNumber) {
-		this.toAccountNumber = toAccountNumber;
+	public void setTo_Account_Id(int to_Account_Id) {
+		this.to_Account_Id = to_Account_Id;
 	}
 
 
